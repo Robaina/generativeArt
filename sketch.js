@@ -14,7 +14,7 @@ function setup() {
   for (let n = 0; n < numberOfBars; n++) {
     let angle = n*sliceSize;
     let barPos = createVector(origin.x + radius*cos(angle), origin.y - radius*sin(angle));
-    bars[n] = new Bar(barPos, angularSpeed2(n));
+    bars[n] = new Bar(barPos, angularSpeed5(n, numberOfBars));
   }
 };
 
@@ -69,4 +69,11 @@ function angularSpeed3(n) {
 
 function angularSpeed4(n) {
   return random(0, 0.001)*2*Math.PI;
+}
+
+function angularSpeed5(n, numberOfBars) {
+  middlePoint = numberOfBars / 2;
+  modulator = middlePoint - abs(middlePoint - n);
+  return 0.00005*modulator*2*Math.PI
+
 }
