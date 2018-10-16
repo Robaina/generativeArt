@@ -14,7 +14,7 @@ function setup() {
   for (let n = 0; n < numberOfBars; n++) {
     let angle = n*sliceSize;
     let barPos = createVector(origin.x + radius*cos(angle), origin.y - radius*sin(angle));
-    bars[n] = new Bar(barPos, angularSpeed5(n, numberOfBars));
+    bars[n] = new Bar(barPos, angularSpeed1(n));
   }
 };
 
