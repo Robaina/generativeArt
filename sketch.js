@@ -56,7 +56,7 @@ function angularSpeed0() {
 }
 
 function angularSpeed1(n) {
-  return n*0.00005*2*Math.PI;
+  return n*0.00001*2*Math.PI;
 }
 
 function angularSpeed2(n) {
