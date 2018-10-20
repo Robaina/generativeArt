@@ -1,4 +1,4 @@
-/* Generative art sketch: a colorful N-Möbius string
+/* Generative art sketch: a colorful N-Möbius strip
    Semidan robaina Esteve
 */
 let bars = [];
