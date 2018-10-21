@@ -3,12 +3,13 @@
 */
 let bars = [];
 let numberOfBars = 150;
-let colorScaleLength = 250;
+let colorScaleLength = 350;
 let screenTouched = -1;
 
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
+  frameRate(30);
   rectMode(CENTER);
   colorMode(HSB, colorScaleLength);
   let minimumDistance = min(width, height);
@@ -31,7 +32,7 @@ function draw() {
     if (screenTouched == -1) {
       bar.updateAngle();
     };
-    bar.color = updateColor(bar.barAngle);
+    bar.updateColor();
     bar.show();
   };
 
@@ -40,21 +41,26 @@ function draw() {
 // objects
 class Bar {
 
-  constructor(pos, angularSpeed, barWidth, barHeight, barAngle, color) {
+  constructor(pos, angularSpeed, barWidth, barHeight, barAngle, barColor) {
     this.pos = pos;
+    this.angularSpeed = angularSpeed;
     this.barWidth = barWidth || 0.3*width;
     this.barHeight = barHeight || 0.01*height;
     this.barAngle = barAngle || 0;
-    this.angularSpeed = angularSpeed;
-    this.color = color || '#e2cc08';
+    this.barColor = barColor || '#e2cc08';
   }
 
   updateAngle() {
     this.barAngle += this.angularSpeed;
   }
 
+  updateColor() {
+    let alpha = (this.barAngle / 2*Math.PI) % colorScaleLength;
+    this.barColor = color(alpha, colorScaleLength, colorScaleLength);
+  }
+
   show() {
-    fill(this.color);
+    fill(this.barColor);
     push();
     translate(this.pos.x, this.pos.y);
     rotate(this.barAngle);
@@ -71,9 +77,4 @@ function angularSpeed(n) {
 
 function updateScreenEvent() {
   screenTouched *= -1;
-}
-
-function updateColor(barAngle) {
-  let alpha = (barAngle / 2*Math.PI) % colorScaleLength;
-  return color(alpha, colorScaleLength, colorScaleLength)
 }
