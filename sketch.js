@@ -3,7 +3,7 @@
 */
 let bars = [];
 let numberOfBars = 150;
-let colorScaleLength = 350;
+let colorScaleLength = 50;
 let screenTouched = -1;
 
 function setup() {
