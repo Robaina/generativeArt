@@ -2,14 +2,31 @@
    Semidan robaina Esteve
 */
 let bars = [];
-let numberOfBars = 150;
-let colorScaleLength = 350;
+let numberOfBars = 160;
+let colorScaleLength = 60;
+let speedFactor = 3e-4;
 let screenTouched = -1;
+let colorSpeedSlider, angularSpeedSlider, numberOfBarsSlider
 
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
+  let minDistance = min(width, height);
+  colorSpeedSlider = createSlider(5, 350, 60, 1);
+  colorSpeedSlider.position(30, 20);
+  colorSpeedSlider.style('width', str(0.15*minDistance) + 'px');
+  angularSpeedSlider = createSlider(0, 10, 0, 0.5);
+  angularSpeedSlider.position(30, 60);
+  angularSpeedSlider.style('width', str(0.15*minDistance) + 'px');
+  numberOfBarsSlider = createSlider(0, 300, 160);
+  numberOfBarsSlider.position(30, 100);
+  numberOfBarsSlider.style('width', str(0.15*minDistance) + 'px');
+
+  colorScaleLength = colorSpeedSlider.value();
+  // speedFactor = 1e-4*angularSpeedSlider.value();
+  // numberOfBars = numberOfBarsSlider.value();
+
   rectMode(CENTER);
   colorMode(HSB, colorScaleLength);
   let minimumDistance = min(width, height);
@@ -20,19 +37,21 @@ function setup() {
   for (let n = 0; n < numberOfBars; n++) {
     let angle = n*sliceSize;
     let barPos = createVector(origin.x + radius*cos(angle), origin.y - radius*sin(angle));
-    bars[n] = new Bar(barPos, angularSpeed(n), barWidth=(5/16)*minimumDistance);
+    bars[n] = new Bar(barPos, n, barWidth=(5/16)*minimumDistance);
   }
 
 };
 
 function draw() {
   background('black');
+  colorScaleLength = colorSpeedSlider.value();
+  speedFactor = 1e-4*angularSpeedSlider.value();
 
   for (bar of bars) {
     if (screenTouched == -1) {
-      bar.updateAngle();
+      bar.updateAngle(speedFactor);
     };
-    bar.updateColor();
+    bar.updateColor(colorScaleLength);
     bar.show();
   };
 
@@ -41,20 +60,20 @@ function draw() {
 // objects
 class Bar {
 
-  constructor(pos, angularSpeed, barWidth, barHeight, barAngle, barColor) {
+  constructor(pos, barNumber, barWidth, barHeight, barAngle, barColor) {
     this.pos = pos;
-    this.angularSpeed = angularSpeed;
+    this.barNumber = barNumber;
     this.barWidth = barWidth || 0.3*width;
     this.barHeight = barHeight || 0.01*height;
     this.barAngle = barAngle || 0;
     this.barColor = barColor || '#e2cc08';
   }
 
-  updateAngle() {
-    this.barAngle += this.angularSpeed;
+  updateAngle(speedFactor) {
+    this.barAngle += speedFactor * (this.barNumber + 2*Math.PI);
   }
 
-  updateColor() {
+  updateColor(colorScaleLength) {
     let alpha = (this.barAngle / 2*Math.PI) % colorScaleLength;
     this.barColor = color(alpha, colorScaleLength, colorScaleLength);
   }
@@ -71,10 +90,6 @@ class Bar {
 }
 
 // helper functions
-function angularSpeed(n) {
-  return 3e-4 * (n + 2*Math.PI)
-}
-
 function updateScreenEvent() {
   screenTouched *= -1;
 }
