@@ -2,9 +2,14 @@
    Semidan robaina Esteve
 */
 let bars = [];
+<<<<<<< HEAD
 let numberOfBars = 160;
 let colorScaleLength = 60;
 let speedFactor = 3e-4;
+=======
+let numberOfBars = 150;
+let colorScaleLength = 50;
+>>>>>>> 29e07e8f7e38cf57752ed884a8cd40f0d25c253f
 let screenTouched = -1;
 let colorSpeedSlider, angularSpeedSlider, numberOfBarsSlider
 
@@ -37,7 +42,11 @@ function setup() {
   for (let n = 0; n < numberOfBars; n++) {
     let angle = n*sliceSize;
     let barPos = createVector(origin.x + radius*cos(angle), origin.y - radius*sin(angle));
+<<<<<<< HEAD
     bars[n] = new Bar(barPos, n, barWidth=(5/16)*minimumDistance);
+=======
+    bars[n] = new Bar(barPos, angularSpeed(n), barWidth=(5/16)*minimumDistance, barHeight=0.01*minimumDistance);
+>>>>>>> 29e07e8f7e38cf57752ed884a8cd40f0d25c253f
   }
 
 };
