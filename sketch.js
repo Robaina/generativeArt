@@ -1,37 +1,16 @@
 /* Generative art sketch: a colorful N-Möbius strip
-   Semidan robaina Esteve
+   Semidan Robaina Estevez
 */
 let bars = [];
-<<<<<<< HEAD
 let numberOfBars = 160;
 let colorScaleLength = 60;
 let speedFactor = 3e-4;
-=======
-let numberOfBars = 150;
-let colorScaleLength = 50;
->>>>>>> 29e07e8f7e38cf57752ed884a8cd40f0d25c253f
 let screenTouched = -1;
-let colorSpeedSlider, angularSpeedSlider, numberOfBarsSlider
 
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
-  let minDistance = min(width, height);
-  colorSpeedSlider = createSlider(5, 350, 60, 1);
-  colorSpeedSlider.position(30, 20);
-  colorSpeedSlider.style('width', str(0.15*minDistance) + 'px');
-  angularSpeedSlider = createSlider(0, 10, 0, 0.5);
-  angularSpeedSlider.position(30, 60);
-  angularSpeedSlider.style('width', str(0.15*minDistance) + 'px');
-  numberOfBarsSlider = createSlider(0, 300, 160);
-  numberOfBarsSlider.position(30, 100);
-  numberOfBarsSlider.style('width', str(0.15*minDistance) + 'px');
-
-  colorScaleLength = colorSpeedSlider.value();
-  // speedFactor = 1e-4*angularSpeedSlider.value();
-  // numberOfBars = numberOfBarsSlider.value();
-
   rectMode(CENTER);
   colorMode(HSB, colorScaleLength);
   let minimumDistance = min(width, height);
@@ -42,19 +21,13 @@ function setup() {
   for (let n = 0; n < numberOfBars; n++) {
     let angle = n*sliceSize;
     let barPos = createVector(origin.x + radius*cos(angle), origin.y - radius*sin(angle));
-<<<<<<< HEAD
-    bars[n] = new Bar(barPos, n, barWidth=(5/16)*minimumDistance);
-=======
-    bars[n] = new Bar(barPos, angularSpeed(n), barWidth=(5/16)*minimumDistance, barHeight=0.01*minimumDistance);
->>>>>>> 29e07e8f7e38cf57752ed884a8cd40f0d25c253f
+    bars[n] = new Bar(barPos, n, barWidth=(5/16)*minimumDistance, barHeight=0.015*minimumDistance);
   }
 
 };
 
 function draw() {
   background('black');
-  colorScaleLength = colorSpeedSlider.value();
-  speedFactor = 1e-4*angularSpeedSlider.value();
 
   for (bar of bars) {
     if (screenTouched == -1) {
