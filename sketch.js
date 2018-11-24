@@ -1,11 +1,11 @@
 /* Generative art sketch: a colorful N-Möbius strip
    Semidan Robaina Estevez
 */
-let bars = [];
-let numberOfBars = 160;
-let colorScaleLength = 60;
-let speedFactor = 3e-4;
+const numberOfBars = 160;
+const colorScaleLength = 60;
+const speedFactor = 3e-4;
 let screenTouched = -1;
+let bars = [];
 
 function setup() {
 
@@ -13,17 +13,16 @@ function setup() {
   frameRate(30);
   rectMode(CENTER);
   colorMode(HSB, colorScaleLength);
-  let minimumDistance = min(width, height);
-  let radius = (1/4)*minimumDistance;
-  let origin = createVector(width/2, height/2);
-  let sliceSize = 2*Math.PI / numberOfBars;
+  const minimumDistance = min(width, height);
+  const radius = (1/4)*minimumDistance;
+  const origin = createVector(width/2, height/2);
+  const sliceSize = 2*Math.PI / numberOfBars;
 
   for (let n = 0; n < numberOfBars; n++) {
     let angle = n*sliceSize;
     let barPos = createVector(origin.x + radius*cos(angle), origin.y - radius*sin(angle));
     bars[n] = new Bar(barPos, n, barWidth=(5/16)*minimumDistance, barHeight=0.015*minimumDistance);
   }
-
 };
 
 function draw() {
