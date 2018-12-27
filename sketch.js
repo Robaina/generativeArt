@@ -74,3 +74,12 @@ class Bar {
 function updateScreenEvent() {
   screenTouched *= -1;
 }
+
+function updateSize(){
+  resizeCanvas(windowWidth, windowHeight);
+  fullscreen();
+  console.log('Resized');
+  // for (bar of bars) {
+  //   bar.scaling = (1/5) * minimumDistance
+  // }
+}

@@ -17,9 +17,20 @@
 	<script src="sketch.js"></script>
   <link rel="stylesheet" href="styles.css">
 
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131412021-1"></script>
+  <script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-131412021-1');
+  </script>
+
+
 </head>
 
-<body onclick="updateScreenEvent()" ontouchcancel="updateScreenEvent()">
+<body onclick="updateScreenEvent()" ontouchcancel="updateScreenEvent()" onresize="updateSize()">
 
 	<a href="https://github.com/Robaina/mobiusArt" class="github-corner" id="github" aria-label="View source on Github">
 	<svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
