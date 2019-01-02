@@ -4,8 +4,9 @@
 const numberOfBars = 160;
 const colorScaleLength = 60;
 const speedFactor = 3e-4;
-let screenTouched = -1;
+let screenTouched = false;
 let bars = [];
+let button = document.getElementById("start-button");
 
 function setup() {
 
@@ -29,7 +30,7 @@ function draw() {
   background('black');
 
   for (bar of bars) {
-    if (screenTouched == -1) {
+    if (screenTouched) {
       bar.updateAngle(speedFactor);
     };
     bar.updateColor(colorScaleLength);
@@ -72,14 +73,16 @@ class Bar {
 
 // helper functions
 function updateScreenEvent() {
-  screenTouched *= -1;
+  screenTouched = !screenTouched;
+  button.innerHTML = "Pause";
+  if (!screenTouched) {
+    button.style['background-color'] = "rgb(208, 165, 37)";
+  } else {
+    button.style['background-color'] = "rgb(120, 120, 120)";
+  }
 }
 
 function updateSize(){
   resizeCanvas(windowWidth, windowHeight);
   fullscreen();
-  console.log('Resized');
-  // for (bar of bars) {
-  //   bar.scaling = (1/5) * minimumDistance
-  // }
 }
